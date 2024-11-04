@@ -1,4 +1,5 @@
 import MainNavbar from "./MainNavbar";
+import Footer from "./Footer";
 import Container from "react-bootstrap/Container";
 
 function HomePage() {
@@ -6,6 +7,7 @@ function HomePage() {
     <>
       <MainNavbar />
       <Container>Content</Container>
+      <Footer></Footer>
     </>
   );
 }
