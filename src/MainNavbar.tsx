@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 function MainNavbar() {
   return (
-    <Navbar className="bg-body-tertiary">
+    <Navbar className="bg-primary-subtle">
       <Container>
         <Navbar.Brand as={Link} to="/">
           FinEG

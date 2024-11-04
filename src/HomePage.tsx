@@ -1,10 +1,11 @@
 import MainNavbar from "./MainNavbar";
+import Container from "react-bootstrap/Container";
 
 function HomePage() {
   return (
     <>
       <MainNavbar />
-      <div>Content</div>
+      <Container>Content</Container>
     </>
   );
 }
