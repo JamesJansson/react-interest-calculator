@@ -6,7 +6,7 @@ function HomePage() {
   return (
     <>
       <MainNavbar />
-      <Container>Content</Container>
+      <Container className="main-section">Content</Container>
       <Footer></Footer>
     </>
   );
