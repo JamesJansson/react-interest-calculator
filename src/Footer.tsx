@@ -8,7 +8,8 @@ function Footer() {
     <Navbar className="bg-black">
       <Container>
         <Navbar.Brand as={Link} to="/">
-          FinEG
+          FinancialEG
+          <div className="text-body-tertiary fs-6">© James Jansson 2024</div>
         </Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav>

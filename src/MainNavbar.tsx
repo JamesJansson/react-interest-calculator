@@ -8,7 +8,7 @@ function MainNavbar() {
     <Navbar className="bg-primary-subtle">
       <Container>
         <Navbar.Brand as={Link} to="/">
-          FinEG
+          FinancialEG
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
