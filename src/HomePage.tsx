@@ -5,6 +5,9 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import piggyBank from "./assets/piggy-bank.jpg";
 import reactLogo from "./assets/react.svg";
+import viteLogo from "./assets/vite.svg";
+import bootstrapLogo from "./assets/bootstrap.svg";
+import typeScriptLogo from "./assets/typescript.svg";
 import "./HomePage.css";
 
 function HomePage() {
@@ -13,7 +16,7 @@ function HomePage() {
       <MainNavbar />
       <div className="main-section">
         <Container>
-          <Row>
+          <Row className="justify-content-center">
             <Col xs="12" sm={{ span: 6, order: "last" }}>
               <img src={piggyBank} className="img-fluid" alt="Piggy bank" />
             </Col>
@@ -43,39 +46,39 @@ function HomePage() {
             </Col>
             <Col xs="12" sm="3" className="text-center">
               <div>
-                <a href="https://react.dev" target="_blank">
+                <a href="https://vite.dev" target="_blank">
                   <img
-                    src={reactLogo}
-                    className="logo react-logo img-fluid"
-                    alt="React logo"
+                    src={viteLogo}
+                    className="logo img-fluid"
+                    alt="Vite logo"
                   />
                 </a>
               </div>
-              <div className="lead">React</div>
+              <div className="lead">Vite</div>
             </Col>
             <Col xs="12" sm="3" className="text-center">
               <div>
-                <a href="https://react.dev" target="_blank">
+                <a href="https://www.typescriptlang.org/" target="_blank">
                   <img
-                    src={reactLogo}
-                    className="logo react-logo img-fluid"
-                    alt="React logo"
+                    src={typeScriptLogo}
+                    className="logo img-fluid"
+                    alt="TypeScript logo"
                   />
                 </a>
               </div>
-              <div className="lead">React</div>
+              <div className="lead">TypeScript</div>
             </Col>
             <Col xs="12" sm="3" className="text-center">
               <div>
-                <a href="https://react.dev" target="_blank">
+                <a href="https://getbootstrap.com/" target="_blank">
                   <img
-                    src={reactLogo}
-                    className="logo react-logo img-fluid"
-                    alt="React logo"
+                    src={bootstrapLogo}
+                    className="logo img-fluid"
+                    alt="Bootstrap logo"
                   />
                 </a>
               </div>
-              <div className="lead">React</div>
+              <div className="lead">Bootstrap</div>
             </Col>
           </Row>
         </Container>
