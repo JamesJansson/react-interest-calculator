@@ -20,12 +20,18 @@ function HomePage() {
             <Col xs="12" sm={{ span: 6, order: "last" }}>
               <img src={piggyBank} className="img-fluid" alt="Piggy bank" />
             </Col>
-            <Col xs="12" sm={{ span: 6, order: "first" }}>
-              <h1 className="display-2">FinancialEG</h1>
-              <p className="lead">
-                Examples of mobile-responsive, FinTech-related React components.
-                Built with Vite using Typescript and Bootstrap.
-              </p>
+            <Col
+              xs="12"
+              sm={{ span: 6, order: "first" }}
+              className="align-self-center"
+            >
+              <div>
+                <h1 className="display-2">FinancialEG</h1>
+                <p className="lead">
+                  Examples of mobile-responsive, FinTech-related React
+                  components. Built with Vite using Typescript and Bootstrap.
+                </p>
+              </div>
             </Col>
           </Row>
         </Container>
@@ -83,7 +89,7 @@ function HomePage() {
           </Row>
         </Container>
       </div>
-      <Footer></Footer>
+      <Footer />
     </>
   );
 }

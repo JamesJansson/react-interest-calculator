@@ -13,10 +13,10 @@ function Footer() {
         </Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav>
-            <Nav.Link as={Link} to="/app">
+            <Nav.Link as={Link} to="/savings">
               Savings
             </Nav.Link>
-            <Nav.Link as={Link} to="/app">
+            <Nav.Link as={Link} to="/loans">
               Loans
             </Nav.Link>
           </Nav>

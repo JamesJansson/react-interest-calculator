@@ -13,10 +13,10 @@ function MainNavbar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav>
-            <Nav.Link as={Link} to="/app">
+            <Nav.Link as={Link} to="/savings">
               Savings
             </Nav.Link>
-            <Nav.Link as={Link} to="/app">
+            <Nav.Link as={Link} to="/loans">
               Loans
             </Nav.Link>
           </Nav>
