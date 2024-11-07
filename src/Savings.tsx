@@ -10,25 +10,48 @@ import Footer from "./Footer";
 import dayjs from "dayjs";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import isLeapYear from "dayjs/plugin/isLeapYear";
+import { Line } from "react-chartjs-2";
+import "chart.js/auto";
 
 dayjs.extend(isSameOrBefore);
 dayjs.extend(isLeapYear);
 
+type GraphData = {
+  labels: string[];
+  datasets: { label: string; data: number[] }[];
+};
+
 function Savings() {
+  function emptyData(): GraphData {
+    return {
+      labels: [],
+      datasets: [
+        {
+          label: "Balance",
+          data: [],
+        },
+        {
+          label: "Interest",
+          data: [],
+        },
+      ],
+    };
+  }
+
   const [state, setState] = useState<{
     deposit: number;
     interestRate: number;
     period: number;
     total: number;
     totalInterest: number;
-    graphData: { label: string; balance: number; interest: number }[];
+    graphData: GraphData;
   }>({
     deposit: 100,
     interestRate: 4.5,
     period: 30,
     total: 0,
     totalInterest: 0,
-    graphData: [],
+    graphData: emptyData(),
   });
 
   function setDeposit(event: ChangeEvent<HTMLInputElement>) {
@@ -55,8 +78,7 @@ function Savings() {
 
     let balance = 0;
     let interest = 0;
-    const graphData: { label: string; balance: number; interest: number }[] =
-      [];
+    const graphData = emptyData();
 
     let accumulatedMonthlyInterest = 0;
     let count = 0;
@@ -70,11 +92,9 @@ function Savings() {
         balance += accumulatedMonthlyInterest;
         interest += accumulatedMonthlyInterest;
 
-        graphData.push({
-          label: currentDay.format("MMM-YY"),
-          balance,
-          interest,
-        });
+        graphData.labels.push(currentDay.format("MMM-YY"));
+        graphData.datasets[0].data.push(balance);
+        graphData.datasets[1].data.push(interest);
 
         accumulatedMonthlyInterest = 0;
       }
@@ -98,7 +118,8 @@ function Savings() {
       <div className="main-section">
         <Container>
           <Row className="justify-content-center">
-            <Col xs="12" sm="6">
+            <Col sm="12" md="4">
+              <h2>Savings calculator</h2>
               <InputGroup className="mb-3" size="lg">
                 <InputGroup.Text>$</InputGroup.Text>
                 <Form.Control
@@ -124,8 +145,8 @@ function Savings() {
                 <InputGroup.Text>years</InputGroup.Text>
               </InputGroup>
             </Col>
-            <Col xs="12" sm="6" className="align-self-center">
-              Graph
+            <Col sm="12" md="8" className="align-self-center">
+              <Line data={state.graphData}></Line>
             </Col>
           </Row>
         </Container>
