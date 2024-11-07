@@ -112,6 +112,8 @@ function Savings() {
           <Row className="justify-content-center">
             <Col sm="12" md="4">
               <h2>Savings calculator</h2>
+
+              <Form.Label>Deposit amount</Form.Label>
               <InputGroup className="mb-3" size="lg">
                 <InputGroup.Text>$</InputGroup.Text>
                 <Form.Control
@@ -122,6 +124,7 @@ function Savings() {
                 <InputGroup.Text>per week</InputGroup.Text>
               </InputGroup>
 
+              <Form.Label>Interest rate</Form.Label>
               <InputGroup className="mb-3" size="lg">
                 <Form.Control
                   aria-label="Interest rate"
@@ -131,6 +134,7 @@ function Savings() {
                 <InputGroup.Text>%</InputGroup.Text>
               </InputGroup>
 
+              <Form.Label>Savings period</Form.Label>
               <InputGroup className="mb-3" size="lg">
                 <Form.Control
                   aria-label="Savings period"
