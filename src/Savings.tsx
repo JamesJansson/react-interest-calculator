@@ -82,7 +82,7 @@ function Savings() {
 
     let accumulatedMonthlyInterest = 0;
     let count = 0;
-    while (currentDay.isSameOrBefore(endDay) && count < 1000 * 365) {
+    while (currentDay.isSameOrBefore(endDay) && count < 100 * 365) {
       if (currentDay.day() === 0) balance += state.deposit;
       const interestRate = currentDay.isLeapYear()
         ? state.interestRate / 100 / 366
@@ -93,8 +93,8 @@ function Savings() {
         interest += accumulatedMonthlyInterest;
 
         graphData.labels.push(currentDay.format("MMM-YY"));
-        graphData.datasets[0].data.push(balance);
-        graphData.datasets[1].data.push(interest);
+        graphData.datasets[0].data.push(Number(balance.toFixed(2)));
+        graphData.datasets[1].data.push(Number(interest.toFixed(2)));
 
         accumulatedMonthlyInterest = 0;
       }
