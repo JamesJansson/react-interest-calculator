@@ -18,7 +18,7 @@ dayjs.extend(isLeapYear);
 
 type GraphData = {
   labels: string[];
-  datasets: { label: string; data: number[] }[];
+  datasets: { label: string; data: string[] }[];
 };
 
 function Savings() {
@@ -93,8 +93,8 @@ function Savings() {
         interest += accumulatedMonthlyInterest;
 
         graphData.labels.push(currentDay.format("MMM-YY"));
-        graphData.datasets[0].data.push(Number(balance.toFixed(2)));
-        graphData.datasets[1].data.push(Number(interest.toFixed(2)));
+        graphData.datasets[0].data.push(balance.toFixed(2));
+        graphData.datasets[1].data.push(interest.toFixed(2));
 
         accumulatedMonthlyInterest = 0;
       }
