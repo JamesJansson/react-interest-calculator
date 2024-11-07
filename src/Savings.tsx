@@ -38,9 +38,13 @@ function Savings() {
     };
   }
 
-  const [deposit, setDeposit] = useState(100);
-  const [interestRate, setInterestRate] = useState(3.5);
-  const [period, setPeriod] = useState(25);
+  const initialDeposit = 100;
+  const initialInterestRate = 3.5;
+  const initialPeriod = 25;
+
+  const [deposit, setDeposit] = useState(initialDeposit);
+  const [interestRate, setInterestRate] = useState(initialInterestRate);
+  const [period, setPeriod] = useState(initialPeriod);
   const [finalBalance, setFinalBalance] = useState(0);
   const [totalInterest, setTotalInterest] = useState(25);
   const [graphData, setGraphData] = useState(emptyGraphData());
@@ -113,6 +117,7 @@ function Savings() {
                 <Form.Control
                   aria-label="Weekly deposit amount"
                   onChange={depositEvent}
+                  defaultValue={initialDeposit}
                 />
                 <InputGroup.Text>per week</InputGroup.Text>
               </InputGroup>
@@ -121,6 +126,7 @@ function Savings() {
                 <Form.Control
                   aria-label="Interest rate"
                   onChange={interestRateEvent}
+                  defaultValue={initialInterestRate}
                 />
                 <InputGroup.Text>%</InputGroup.Text>
               </InputGroup>
@@ -129,6 +135,7 @@ function Savings() {
                 <Form.Control
                   aria-label="Savings period"
                   onChange={periodEvent}
+                  defaultValue={initialPeriod}
                 />
                 <InputGroup.Text>years</InputGroup.Text>
               </InputGroup>
