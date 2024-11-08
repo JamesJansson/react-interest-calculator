@@ -41,8 +41,8 @@ function Loans() {
   const [loanAmount, setLoanAmount] = useState(initialLoanAmount);
   const [interestRate, setInterestRate] = useState(initialInterestRate);
   const [period, setPeriod] = useState(initialPeriod);
-  const [monthlyPayment, setMonthlyPayment] = useState(0);
-  const [totalPayments, setTotalPayments] = useState(0);
+  const [monthlyRepayment, setMonthlyRepayment] = useState(0);
+  const [totalRepayments, setTotalRepayments] = useState(0);
   const [totalInterest, setTotalInterest] = useState(25);
   const [graphData, setGraphData] = useState(emptyGraphData());
 
@@ -106,7 +106,9 @@ function Loans() {
     }
 
     if (bestCase) {
-      setTotalPayments(bestCase.totalPayment);
+      setMonthlyRepayment(repayment);
+      setTotalInterest(bestCase.totalInterest);
+      setTotalRepayments(bestCase.totalPayment);
       setTotalInterest(bestCase.totalInterest);
       setGraphData(bestCase.graphData);
     }
@@ -153,7 +155,7 @@ function Loans() {
         } else {
           gData.labels.push("Year " + year);
         }
-        gData.datasets[0].data.push(balance.toString());
+        gData.datasets[0].data.push(balance.toFixed(2));
       }
 
       month++;
@@ -209,6 +211,45 @@ function Loans() {
                   min="0"
                 />
                 <InputGroup.Text>years</InputGroup.Text>
+              </InputGroup>
+
+              <Form.Label>Monthly repayment</Form.Label>
+              <InputGroup className="mb-3" size="lg">
+                <InputGroup.Text>$</InputGroup.Text>
+                <Form.Control
+                  aria-label="Monthly repayment"
+                  value={new Intl.NumberFormat("en-US", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  }).format(monthlyRepayment)}
+                  readOnly
+                />
+              </InputGroup>
+
+              <Form.Label>Total repayment</Form.Label>
+              <InputGroup className="mb-3" size="lg">
+                <InputGroup.Text>$</InputGroup.Text>
+                <Form.Control
+                  aria-label="Total repayment"
+                  value={new Intl.NumberFormat("en-US", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  }).format(totalRepayments)}
+                  readOnly
+                />
+              </InputGroup>
+
+              <Form.Label>Total interest</Form.Label>
+              <InputGroup className="mb-3" size="lg">
+                <InputGroup.Text>$</InputGroup.Text>
+                <Form.Control
+                  aria-label="Total interest"
+                  value={new Intl.NumberFormat("en-US", {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  }).format(totalInterest)}
+                  readOnly
+                />
               </InputGroup>
             </Col>
             <Col sm="12" md="8" className="align-self-center">
