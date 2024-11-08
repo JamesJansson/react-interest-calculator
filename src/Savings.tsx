@@ -45,8 +45,8 @@ function Savings() {
   const [deposit, setDeposit] = useState(initialDeposit);
   const [interestRate, setInterestRate] = useState(initialInterestRate);
   const [period, setPeriod] = useState(initialPeriod);
-  const [finalBalance, setFinalBalance] = useState(0);
-  const [totalInterest, setTotalInterest] = useState(25);
+  const [, setFinalBalance] = useState(0);
+  const [, setTotalInterest] = useState(25);
   const [graphData, setGraphData] = useState(emptyGraphData());
 
   function depositEvent(event: ChangeEvent<HTMLInputElement>) {
