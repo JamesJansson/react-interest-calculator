@@ -120,6 +120,8 @@ function Savings() {
                   aria-label="Weekly deposit amount"
                   onChange={depositEvent}
                   defaultValue={initialDeposit}
+                  type="number"
+                  min="0"
                 />
                 <InputGroup.Text>per week</InputGroup.Text>
               </InputGroup>
@@ -130,6 +132,8 @@ function Savings() {
                   aria-label="Interest rate"
                   onChange={interestRateEvent}
                   defaultValue={initialInterestRate}
+                  type="number"
+                  min="0"
                 />
                 <InputGroup.Text>%</InputGroup.Text>
               </InputGroup>
@@ -140,6 +144,8 @@ function Savings() {
                   aria-label="Savings period"
                   onChange={periodEvent}
                   defaultValue={initialPeriod}
+                  type="number"
+                  min="0"
                 />
                 <InputGroup.Text>years</InputGroup.Text>
               </InputGroup>

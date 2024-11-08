@@ -30,22 +30,18 @@ function Loans() {
           label: "Balance",
           data: [],
         },
-        {
-          label: "Interest",
-          data: [],
-        },
       ],
     };
   }
 
-  const initialLoanAmount = 100;
+  const initialLoanAmount = 750000;
   const initialInterestRate = 5.5;
   const initialPeriod = 30;
 
   const [loanAmount, setLoanAmount] = useState(initialLoanAmount);
   const [interestRate, setInterestRate] = useState(initialInterestRate);
   const [period, setPeriod] = useState(initialPeriod);
-  const [monthlyPayments, setMonthlyPayments] = useState(0);
+  const [monthlyPayment, setMonthlyPayment] = useState(0);
   const [totalPayments, setTotalPayments] = useState(0);
   const [totalInterest, setTotalInterest] = useState(25);
   const [graphData, setGraphData] = useState(emptyGraphData());
@@ -70,39 +66,50 @@ function Loans() {
   }, [loanAmount, interestRate, period]);
 
   function calculateAndGraphLoan() {
-    let currentDay = dayjs();
-    const endDay = currentDay.add(period, "year");
+    if (loanAmount <= 0 || period <= 0 || interestRate < 0) return;
 
-    let balance = 0;
-    let interest = 0;
-    const gData = emptyGraphData();
+    const minimumRepayment = loanAmount / 12 / period; // No interest level
+    const maximumInterest = loanAmount * (interestRate / 100 / 12);
 
-    let accumulatedMonthlyInterest = 0;
+    let repayment = minimumRepayment;
+    let bestCase:
+      | undefined
+      | {
+          graphData: GraphData;
+          totalInterest: number;
+          totalPayment: number;
+          balance: number;
+          repayment: number;
+        } = undefined;
     let count = 0;
-    while (currentDay.isSameOrBefore(endDay) && count < 100 * 365) {
-      if (currentDay.day() === 0) balance += loanAmount;
-      const dailyInterestRate = currentDay.isLeapYear()
-        ? interestRate / 100 / 366
-        : interestRate / 100 / 365;
-      accumulatedMonthlyInterest += balance * dailyInterestRate;
-      if (currentDay.date() === 1) {
-        balance += accumulatedMonthlyInterest;
-        interest += accumulatedMonthlyInterest;
-
-        gData.labels.push(currentDay.format("MMM-YY"));
-        gData.datasets[0].data.push(balance.toFixed(2));
-        gData.datasets[1].data.push(interest.toFixed(2));
-
-        accumulatedMonthlyInterest = 0;
-      }
-
-      currentDay = currentDay.add(1, "day");
+    while (repayment <= minimumRepayment + maximumInterest && !bestCase) {
       count++;
+
+      const result = calculateLoan({
+        loanAmount,
+        interestRate,
+        period,
+        repayment,
+      });
+
+      console.log({
+        count,
+        repayment,
+        minimumRepayment,
+        maximumInterest,
+        balance: result.balance,
+      });
+
+      if (result.balance === 0) bestCase = { ...result, repayment };
+
+      repayment += maximumInterest / 100;
     }
 
-    setTotalPayments(balance);
-    setTotalInterest(interest);
-    setGraphData(gData);
+    if (bestCase) {
+      setTotalPayments(bestCase.totalPayment);
+      setTotalInterest(bestCase.totalInterest);
+      setGraphData(bestCase.graphData);
+    }
   }
 
   function calculateLoan({
@@ -117,13 +124,13 @@ function Loans() {
     repayment: number;
   }) {
     const monthlyInterestRate = interestRate / 12 / 100;
-
+    const gData = emptyGraphData();
     let balance = loanAmount;
     let totalPayment = 0;
     let totalInterest = 0;
     let month = 0;
     let year = 0;
-    while (year <= period && year < 100 && balance > 0) {
+    while (year < period && year <= 100 && balance > 0) {
       const interest = balance * monthlyInterestRate;
 
       balance += interest;
@@ -137,14 +144,26 @@ function Loans() {
         balance = 0;
       }
 
-      balance = month++;
+      if (month === 0 || balance === 0) {
+        if (
+          balance == 0 &&
+          gData.labels[gData.labels.length - 1] === "Year " + year
+        ) {
+          gData.labels.push("Year " + (year + 1));
+        } else {
+          gData.labels.push("Year " + year);
+        }
+        gData.datasets[0].data.push(balance.toString());
+      }
+
+      month++;
       if (month === 12) {
         year++;
         month = 0;
       }
     }
 
-    return { totalInterest, totalPayment };
+    return { totalInterest, totalPayment, balance, graphData: gData };
   }
 
   return (
@@ -163,6 +182,8 @@ function Loans() {
                   aria-label="Loan amount"
                   onChange={loanAmountEvent}
                   defaultValue={initialLoanAmount}
+                  type="number"
+                  min="0"
                 />
               </InputGroup>
 
@@ -172,6 +193,8 @@ function Loans() {
                   aria-label="Interest rate"
                   onChange={interestRateEvent}
                   defaultValue={initialInterestRate}
+                  type="number"
+                  min="0"
                 />
                 <InputGroup.Text>%</InputGroup.Text>
               </InputGroup>
@@ -182,6 +205,8 @@ function Loans() {
                   aria-label="Loan period"
                   onChange={periodEvent}
                   defaultValue={initialPeriod}
+                  type="number"
+                  min="0"
                 />
                 <InputGroup.Text>years</InputGroup.Text>
               </InputGroup>
