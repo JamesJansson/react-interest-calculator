@@ -1,6 +1,8 @@
 import MainNavbar from "./MainNavbar";
 import Footer from "./Footer";
 import Container from "react-bootstrap/Container";
+import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import piggyBank from "./assets/piggy-bank.jpg";
@@ -31,6 +33,12 @@ function HomePage() {
                   Examples of mobile-responsive, FinTech-related React
                   components. Built with Vite using Typescript and Bootstrap.
                 </p>
+                <Link to="/savings">
+                  <Button variant="primary">Savings</Button>{" "}
+                </Link>{" "}
+                <Link to="/loans">
+                  <Button variant="primary">Loans</Button>{" "}
+                </Link>
               </div>
             </Col>
           </Row>
