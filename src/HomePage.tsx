@@ -33,12 +33,14 @@ function HomePage() {
                   Examples of mobile-responsive, FinTech-related React
                   components. Built with Vite using Typescript and Bootstrap.
                 </p>
-                <Link to="/savings">
-                  <Button variant="primary">Savings</Button>{" "}
-                </Link>{" "}
-                <Link to="/loans">
-                  <Button variant="primary">Loans</Button>{" "}
-                </Link>
+                <div className="text-center hero-banner-buttons">
+                  <Link to="/savings">
+                    <Button variant="primary">Savings</Button>{" "}
+                  </Link>{" "}
+                  <Link to="/loans">
+                    <Button variant="primary">Loans</Button>{" "}
+                  </Link>
+                </div>
               </div>
             </Col>
           </Row>
@@ -46,7 +48,7 @@ function HomePage() {
         <Container>
           <h2>Technologies</h2>
           <Row>
-            <Col xs="12" sm="3" className="text-center">
+            <Col xs="6" sm="3" className="text-center">
               <div>
                 <a href="https://react.dev" target="_blank">
                   <img
@@ -58,7 +60,7 @@ function HomePage() {
               </div>
               <div className="lead">React</div>
             </Col>
-            <Col xs="12" sm="3" className="text-center">
+            <Col xs="6" sm="3" className="text-center">
               <div>
                 <a href="https://vite.dev" target="_blank">
                   <img
@@ -70,7 +72,7 @@ function HomePage() {
               </div>
               <div className="lead">Vite</div>
             </Col>
-            <Col xs="12" sm="3" className="text-center">
+            <Col xs="6" sm="3" className="text-center">
               <div>
                 <a href="https://www.typescriptlang.org/" target="_blank">
                   <img
@@ -82,7 +84,7 @@ function HomePage() {
               </div>
               <div className="lead">TypeScript</div>
             </Col>
-            <Col xs="12" sm="3" className="text-center">
+            <Col xs="6" sm="3" className="text-center">
               <div>
                 <a href="https://getbootstrap.com/" target="_blank">
                   <img
